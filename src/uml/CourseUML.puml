@@ -1,0 +1,42 @@
+@startuml CourseUML
+
+class CircuitDeCourse {
+     + getVoitures(): List<Voitures>
+     + getSafetyCar(): SafetyCar
+}
+
+enum Constructeur
+
+enum Couleur
+
+interface VoitureDuChampionnatDeFormuleUn {
+     + accelerer(): void
+     + freiner(): void
+     + tourner(): void
+     + getCouleur(): Couleur
+     + getConstructeur(): Constructeur
+}
+
+class Voiture {
+     + Voiture(Constructeur)
+}
+
+class VoitureFactory {
+     + getVoitureDuChampionnatDeFormuleUn(Constructeur): VoitureDuChampionnatDeFormuleUn
+}
+note "Factory" as N1
+VoitureFactory ... N1
+
+
+class SafetyCar {
+    {static} - instance: SafetyCar
+    {static} + getInstance(): SafetyCar
+}
+note "Singleton" as N2
+SafetyCar ... N2
+
+VoitureDuChampionnatDeFormuleUn <|.. Voiture
+
+CircuitDeCourse ..> VoitureFactory : uses
+
+@enduml[]
